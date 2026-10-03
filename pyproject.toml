@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=77"]  # PEP-639-Lizenzfelder
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "panolevel"
+version = "0.3.0"
+description = "Levels stitched 360° equirectangular panoramas: detects vertical lines, writes PTGui vertical control points or rotates the image directly."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "André Stiebitz" }]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "opencv-python-headless",
+    "fastapi",
+    "uvicorn",
+]
+keywords = ["panorama", "360", "equirectangular", "ptgui", "leveling"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Multimedia :: Graphics",
+]
+
+[project.optional-dependencies]
+test = ["httpx"]
+dev = ["httpx", "ruff"]
+
+[project.scripts]
+panolevel = "panolevel.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+panolevel = ["web/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["docs", ".planning"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+# l/I sind in der Geometrie-Mathematik gebräuchliche Namen
+ignore = ["E741"]
+
+[tool.ruff.lint.per-file-ignores]
+# Wegwerf-Experimente, nur ausgeführt, nicht gepflegt
+"spikes/*" = ["E401", "E501", "E701", "E702", "B007", "F841", "UP031"]

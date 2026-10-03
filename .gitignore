@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Arbeits-/Testdaten (Panos sind riesig, nie committen)
+*.png
+*.tif
+*.tiff
+*.jpg
+*.jpeg
+*.exr
+!docs/**/*.png
+!spikes/**/*.png
+
+# Tool-Output
+*.autolevel.pts
+/tmp/
+out/
+
+# Build
+build/
+dist/
+
+# Lokale Agent-Einstellungen
+.claude/settings.local.json
